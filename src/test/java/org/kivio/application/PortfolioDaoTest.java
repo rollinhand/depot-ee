@@ -19,7 +19,7 @@ public class PortfolioDaoTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClasses(PortfolioDao.class, Portfolio.class, PortfolioId.class)
+                .addClasses(PortfolioDao.class, Portfolio.class, PortfolioId.class, LogProvider.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml");
     }
