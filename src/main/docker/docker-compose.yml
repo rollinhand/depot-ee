@@ -1,0 +1,6 @@
+version: 1.0
+
+services:
+  kivio-proxy:
+    build: .
+    image: depot-ee:latest

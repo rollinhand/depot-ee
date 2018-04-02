@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="template/common/commonLayout.xhtml">
+    <ui:define name="content">
+        <h:form id="portfolioFormId">
+            <b:row>
+                <b:column>
+                    <h1>Portfolio</h1>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column>
+                    <b:panelGrid columns="3">
+                        <b:dropButton value="#{portfolioViewBean.selectedNavDateAsString}" span="3">
+                            <ui:repeat value="#{portfolioViewBean.allNavDates}" var="item">
+                                <b:navCommandLink value="#{item}" action="#{portfolioViewBean.setSelectedNavDate(item)}">
+                                    <f:ajax execute="@this" render="@form" />
+                                </b:navCommandLink>
+                            </ui:repeat>
+                        </b:dropButton>
+                        <h:outputText value="#{portfolioViewBean.total.marketValueAvg} EUR" />
+                        <h:outputText value="Gewinn: #{portfolioViewBean.total.returnNominalAvg} EUR (#{portfolioViewBean.total.returnPct}%)" />
+                    </b:panelGrid>
+                    <b:dataTable id="portfolioTable"
+                                 value="#{portfolioViewBean.values}"
+                                 var="rowItem"
+                                 paginated="false"
+                                 searching="false">
+                        <b:dataTableColumn label="NAV-Datum">
+                            <h:outputText value="#{rowItem.portfolioId.navDate}">
+                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="ISIN" value="#{rowItem.instrument.isin}" />
+                        <b:dataTableColumn label="Bezeichnung" value="#{rowItem.instrument.name}" />
+                        <b:dataTableColumn label="Nominal" value="#{rowItem.nominal}" />
+                        <b:dataTableColumn label="Kaufwert" value="#{rowItem.buyingMarketValue} #{rowItem.currency}" />
+                        <b:dataTableColumn label="Aktueller Wert" value="#{rowItem.currentMarketValue} #{rowItem.currency}" />
+                        <b:dataTableColumn label="Gewinn">
+                            <h:outputText value="#{rowItem.returnNominal} #{rowItem.currency}" styleClass="#{rowItem.returnNominal lt 0 ? 'text-danger' : 'text-success'}" />
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Gewinn">
+                            <h:outputText value="#{rowItem.returnPct} %" styleClass="#{rowItem.returnNominal lt 0 ? 'text-danger' : 'text-success'}" />
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:column>
+            </b:row>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

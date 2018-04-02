@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c3="http://kivio.org/c3faces">
+<ui:composition template="template/common/commonLayout.xhtml">
+    <ui:define name="content">
+        <h:form id="portfolioFormId">
+            <b:row>
+                <!-- Reihe mit Grafik -->
+                <b:column>
+                    <c3:line id="chart" data="#{dashboardViewBean.data}" >
+                        <c3:axes>
+                            <c3:axisX type="category" categories="#{dashboardViewBean.months}" />
+                        </c3:axes>
+                    </c3:line>
+                </b:column>
+            </b:row>
+            <b:row>
+                <!-- Reihe mit Tabelle -->
+                <b:column>
+                    <b:dataTable id="portfolioTable"
+                                 value="#{dashboardViewBean.totalPortfolio}"
+                                 var="rowItem"
+                                 paginated="false"
+                                 searching="false">
+                        <b:dataTableColumn label="Monat">
+                            <h:outputText value="#{rowItem.navDate}">
+                                <f:convertDateTime pattern="yyyy-MM" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Marktwert (Min)" style="text-align:right;">
+                            <h:outputText value="#{rowItem.marketValueMin} EUR">
+                                <f:convertNumber maxFractionDigits="2" type="currency"/>
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Marktwert (Avg)" style="text-align:right;">
+                            <h:outputText value="#{rowItem.marketValueAvg} EUR">
+                                <f:convertNumber currencySymbol="EUR" pattern="#000.00" type="currency"/>
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Marktwert (Max)" style="text-align:right;">
+                            <h:outputText value="#{rowItem.marketValueMax} EUR">
+                                <f:convertNumber maxFractionDigits="2" type="currency"/>
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Return (Avg)" style="text-align:right;">
+                            <h:outputText value="#{rowItem.returnNominalAvg} EUR">
+                                <f:convertNumber currencySymbol="EUR" pattern="#000.00" type="currency"/>
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Return (%)" style="text-align:right;">
+                            <h:outputText value="#{rowItem.returnPct}%">
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="percent"/>
+                            </h:outputText>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:column>
+            </b:row>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

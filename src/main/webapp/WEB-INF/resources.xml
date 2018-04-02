@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource id="DepotDS" type="DataSource">
+        JdbcDriver = org.h2.Driver
+        JdbcUrl = jdbc:h2:file:/opt/depot/depotDb
+        UserName = sa
+        Password = sa
+        jtaManaged = true
+    </Resource>
+</tomee>

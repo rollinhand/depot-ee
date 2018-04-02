@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="create table instruments" author="bberg">
+        <createTable tableName="INSTRUMENT">
+            <column name="ISIN" type="VARCHAR(12)" remarks="ISIN" />
+            <column name="NAME" type="VARCHAR(255)" remarks="Wertpapiername" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create pk on instruments" author="bberg">
+        <addNotNullConstraint tableName="INSTRUMENT" columnName="ISIN" columnDataType="VARCHAR(12)"/>
+        <addPrimaryKey tableName="INSTRUMENT" columnNames="ISIN" constraintName="INSTRUMENT_PK" />
+    </changeSet>
+
+    <changeSet id="create table portfolio" author="bberg">
+        <createTable tableName="PORTFOLIO">
+            <column name="ISIN" type="VARCHAR(12)" remarks="ISIN" />
+            <column name="NAV_DATE" type="DATE" remarks="NAV-Datum" />
+            <column name="NOMINAL" type="NUMBER" remarks="Nominal / Stuecke" />
+            <column name="CURRENCY" type="VARCHAR(3)" remarks="Waehrung" />
+            <column name="BUYING_RATE" type="NUMBER" remarks="Einstandskurs" />
+            <column name="BUYING_MARKET_VALUE" type="NUMBER" remarks="Einstandswert" />
+            <column name="CURRENT_RATE" type="NUMBER" remarks="Bewertungskurs" />
+            <column name="CURRENT_MARKET_VALUE" type="NUMBER" remarks="Kurswert" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create pk on portfolio" author="bberg">
+        <addNotNullConstraint tableName="PORTFOLIO" columnName="NAV_DATE" columnDataType="DATE" />
+        <addNotNullConstraint tableName="PORTFOLIO" columnName="ISIN" columnDataType="VARCHAR(12)"/>
+        <addPrimaryKey tableName="PORTFOLIO" columnNames="NAV_DATE, ISIN" constraintName="PORTFOLIO_PK"/>
+    </changeSet>
+
+    <changeSet id="create index on " author="">
+        <createIndex tableName="PORTFOLIO" indexName="PORTFOLIO_ISIN_IDX">
+            <column name="ISIN" />
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="create log table" author="bberg">
+        <createTable tableName="LOG">
+            <column name="ID" type="INTEGER" autoIncrement="true" remarks="fortlaufende Nummer" />
+            <column name="TIMESTAMP" type="TIMESTAMP" remarks="Zeitstempel" />
+            <column name="LEVEL" type="VARCHAR(5)" remarks="Loglevel (ERROR, WARN, INFO)" />
+            <column name="MESSAGE" type="VARCHAR(255)" remarks="Lognachricht" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create pk on log" author="bberg">
+        <addNotNullConstraint tableName="LOG" columnName="ID" columnDataType="INTEGER" />
+        <addNotNullConstraint tableName="LOG" columnName="TIMESTAMP" columnDataType="TIMESTAMP" />
+        <addNotNullConstraint tableName="LOG" columnName="LEVEL" columnDataType="VARCHAR(5)" />
+        <addPrimaryKey tableName="LOG" columnNames="ID" constraintName="LOG_PK" />
+    </changeSet>
+
+    <changeSet id="create View PORTFOLIO_TOTAL" author="bberg" runAlways="true" runOnChange="true">
+        <createView viewName="PORTFOLIO_TOTAL" replaceIfExists="true">
+            SELECT NAV_DATE,
+                (SUM(CURRENT_MARKET_VALUE)) AS CURRENT_MARKET_VALUE,
+                (SUM(BUYING_MARKET_VALUE)) AS BUYING_MARKET_VALUE,
+                (SUM(CURRENT_MARKET_VALUE) - SUM(BUYING_MARKET_VALUE)) AS RETURN_NOMINAL
+                FROM PORTFOLIO
+                GROUP BY NAV_DATE
+        </createView>
+    </changeSet>
+</databaseChangeLog>
