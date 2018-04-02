@@ -1,9 +1,7 @@
 package org.kivio.presentation;
 
 import org.kivio.application.ImportBean;
-import org.kivio.application.LogBean;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -18,7 +16,8 @@ import java.io.Serializable;
 @Named
 @ViewScoped
 public class UploadBean implements Serializable {
-    private static Logger log = LoggerFactory.getLogger(UploadBean.class);
+    @Inject
+    private Logger log;
     private Part file;
 
     @Inject

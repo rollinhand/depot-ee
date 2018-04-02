@@ -2,15 +2,11 @@ package org.kivio.presentation;
 
 import org.kivio.application.PortfolioDao;
 import org.kivio.c3faces.model.C3Category;
-import org.kivio.c3faces.model.C3DataSet;
-import org.kivio.c3faces.model.C3ViewDataSet;
 import org.kivio.c3faces.script.property.Data;
-import org.kivio.c3faces.style.C3Theme;
 import org.kivio.entities.PortfolioTotal;
 import org.kivio.event.Import;
 import org.kivio.event.UpdateEvent;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
@@ -19,15 +15,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
 public class DashboardViewBean implements Serializable {
-    final static Logger log = LoggerFactory.getLogger(DashboardViewBean.class);
+    @Inject
+    private Logger log;
 
     @Inject
     private PortfolioDao portfolioDao;

@@ -1,17 +1,13 @@
 package org.kivio.presentation;
 
-import org.kivio.application.PortfolioDao;
 import org.kivio.c3faces.model.C3Category;
 import org.kivio.c3faces.model.C3DataSet;
 import org.kivio.c3faces.model.C3ViewDataSet;
 import org.kivio.c3faces.script.property.Data;
 import org.kivio.c3faces.style.C3Color;
-import org.kivio.c3faces.style.C3Theme;
 import org.kivio.entities.PortfolioTotal;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,7 +20,8 @@ import java.util.stream.Collectors;
 @Named
 @ViewScoped
 public class C3ChartBean implements Serializable {
-    private final Logger log = LoggerFactory.getLogger(C3ChartBean.class);
+    @Inject
+    private Logger log;
 
     private final Data data = new Data();
 

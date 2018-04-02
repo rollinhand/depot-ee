@@ -3,13 +3,11 @@ package org.kivio.application;
 import org.kivio.entities.Portfolio;
 import org.kivio.entities.PortfolioTotal;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +17,8 @@ import java.util.List;
 
 @Stateless
 public class PortfolioDao implements Serializable {
-    static final Logger log = LoggerFactory.getLogger(PortfolioDao.class);
+    @Inject
+    private Logger log;
 
     @PersistenceContext(unitName = "depot")
     private EntityManager em;
@@ -28,7 +27,6 @@ public class PortfolioDao implements Serializable {
     public void save(Portfolio portfolio) {
         em.merge(portfolio);    // sonst exception mit instrument
         em.flush();
-        log.info("persistence done");
     }
 
     public List<Portfolio> findAll() {

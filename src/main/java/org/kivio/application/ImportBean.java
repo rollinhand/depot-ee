@@ -7,13 +7,10 @@ import org.kivio.event.Import;
 import org.kivio.event.UpdateEvent;
 import org.kivio.helper.PortfolioBuilder;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,7 +21,8 @@ import java.util.List;
 
 @Stateless
 public class ImportBean {
-    private static Logger log = LoggerFactory.getLogger(ImportBean.class);
+    @Inject
+    private Logger log;
 
     @Inject
     @Import

@@ -6,7 +6,6 @@ import org.kivio.application.InstrumentDao;
 import org.kivio.application.PortfolioDao;
 import org.kivio.entities.Instrument;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,14 +14,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
 @Path("api")
 public class DepotService {
-    private Logger log = LoggerFactory.getLogger(DepotService.class);
+    @Inject
+    private Logger log;
     private static String CONTENT_ID = "file";
 
     @Inject

@@ -33,7 +33,7 @@
             <property name="javax.persistence.jdbc.password" value="sa" />
             <property name="javax.persistence.jdbc.show_sql" value="true" />
             <property name="openjpa.RuntimeUnenhancedClasses" value="unsupported" />
-            <property name="openjpa.Log" value="DefaultLevel=INFO, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+            <property name="openjpa.Log" value="DefaultLevel=INFO, Runtime=INFO, Tool=INFO, SQL=INFO"/>
             <property name="openjpa.hint.UseLiteralInSQL" value="true"/>
         </properties>
     </persistence-unit>

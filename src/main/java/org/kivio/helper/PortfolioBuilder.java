@@ -6,9 +6,9 @@ import org.kivio.entities.Instrument;
 import org.kivio.entities.Portfolio;
 import org.kivio.entities.PortfolioId;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,7 +16,8 @@ import java.util.Date;
 
 @Dependent
 public class PortfolioBuilder {
-    private final Logger log = LoggerFactory.getLogger(PortfolioBuilder.class);
+    @Inject
+    private Logger log;
 
     public Portfolio build(CSVRecord record, Date navDate) {
         Portfolio p = null;

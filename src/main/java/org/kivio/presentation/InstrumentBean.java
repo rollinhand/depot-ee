@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
 @RequestScoped
 @Named
 public class InstrumentBean {
-    private static final Logger log = LoggerFactory.getLogger(InstrumentBean.class);
+    @Inject
+    private Logger log;
 
     @Inject
     private InstrumentDao instrumentDao;

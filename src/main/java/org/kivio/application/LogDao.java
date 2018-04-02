@@ -2,11 +2,11 @@ package org.kivio.application;
 
 import org.kivio.entities.LogMessage;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,8 @@ import java.util.List;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NEVER)
 public class LogDao {
-    private static Logger log = LoggerFactory.getLogger(LogDao.class);
+    @Inject
+    private Logger log;
 
     @PersistenceContext(unitName = "depot")
     private EntityManager em;

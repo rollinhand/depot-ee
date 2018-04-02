@@ -4,7 +4,6 @@ import org.kivio.application.PortfolioDao;
 import org.kivio.entities.Portfolio;
 import org.kivio.entities.PortfolioTotal;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -20,7 +19,8 @@ import java.util.stream.Collectors;
 @Named
 @ViewScoped
 public class PortfolioViewBean implements Serializable {
-    private static Logger log = LoggerFactory.getLogger(PortfolioViewBean.class);
+    @Inject
+    private Logger log;
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     private Date selectedNavDate;

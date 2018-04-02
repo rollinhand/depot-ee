@@ -6,7 +6,6 @@ import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,7 +15,8 @@ import java.io.IOException;
 @Named
 @RequestScoped
 public class SecurityBean {
-    private final Logger log = LoggerFactory.getLogger(SecurityBean.class);
+    @Inject
+    private Logger log;
     private static final String LOGIN_URL = "login.xhtml";
     private static final String DASHBOARD = "dashboard.xhtml";
 
