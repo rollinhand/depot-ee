@@ -7,7 +7,8 @@
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
     <title>Depotauswertung</title>
-    <meta name="author" content="The Author"></meta>
+    <meta name="author" content="Björn Berg"></meta>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['common/images/favicon.ico']}"/>
 </h:head>
 <h:body style="padding: 60px 30px;">
     <h:form id="uploadFormId" enctype='multipart/form-data'>
@@ -40,16 +41,7 @@
     </b:navBar>
     </h:form>
     <b:container>
-        <ui:insert name="content">
-            <b:jumbotron>
-                <h1>BootsFaces Starter Template</h1>
-                <p> Use this JSF document as a way to quickly start any new project.</p>
-                <p> All you get is this text and a mostly barebone JSF document.</p>
-                <p>
-                    <a href="https://github.com/TheCoder4eu/BootsFaces-examples/blob/master/src/main/webapp/starter_template.xhtml" class="btn btn-lg btn-info">View Page Source »</a>
-                </p>
-            </b:jumbotron>
-        </ui:insert>
+        <ui:insert name="content" />
     </b:container>
 </h:body>
 </html>
