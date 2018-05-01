@@ -73,6 +73,11 @@ public class Portfolio implements Comparable {
                 .multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP);
     }
 
+    @Transient
+    public String getIsoCode() {
+        return portfolioId.getIsin().substring(0, 2);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
