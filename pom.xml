@@ -34,7 +34,7 @@
     <commons.csv.version>1.5</commons.csv.version>
     <h2.version>1.4.196</h2.version>
     <liquibase.version>3.5.3</liquibase.version>
-    <shiro.version>1.4.0</shiro.version>
+    <shiro.version>1.5.1</shiro.version>
       <omnifaces.version>2.5.1</omnifaces.version>
       <finalName>depot-ee</finalName>
   </properties>
