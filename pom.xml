@@ -32,7 +32,7 @@
     <version.openjpa>2.4.2</version.openjpa>
     <lombok.version>1.16.16</lombok.version>
     <commons.csv.version>1.5</commons.csv.version>
-    <h2.version>2.1.210</h2.version>
+    <h2.version>2.2.220</h2.version>
     <liquibase.version>4.8.0</liquibase.version>
     <shiro.version>1.10.0</shiro.version>
       <omnifaces.version>2.5.1</omnifaces.version>
